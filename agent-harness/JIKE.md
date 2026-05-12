@@ -98,7 +98,7 @@ createdAt, likeCount, replyCount, ...
 ## CLI Command Structure
 
 ```
-cli-web-jike
+jike
 ├── auth login          — Browser-based login, extract JWT token
 ├── auth status         — Check auth state
 ├── auth logout         — Remove auth

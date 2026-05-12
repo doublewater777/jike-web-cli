@@ -1,4 +1,5 @@
-"""Feed commands for cli-web-jike."""
+"""Feed commands for jike."""
+
 from __future__ import annotations
 
 import click
@@ -24,12 +25,24 @@ def feed_following(ctx, limit, load_more_key):
         data = client.following_feed(limit=min(limit, 50), load_more_key=load_more_key)
         posts = data if isinstance(data, list) else data.get("data", [])
         if ctx.obj.get("json"):
-            print_json({"success": True, "data": posts, "loadMoreKey": data.get("loadMoreKey") if isinstance(data, dict) else None})
+            print_json(
+                {
+                    "success": True,
+                    "data": posts,
+                    "loadMoreKey": data.get("loadMoreKey")
+                    if isinstance(data, dict)
+                    else None,
+                }
+            )
         else:
             for post in posts:
                 user = post.get("user", {})
-                click.echo(f"[{user.get('screenName', '?')}] {post.get('content', '')[:120]}")
-                click.echo(f"  ❤ {post.get('likeCount', 0)}  💬 {post.get('commentCount', 0)}  🔄 {post.get('repostCount', 0)}  — {post.get('id', '')}")
+                click.echo(
+                    f"[{user.get('screenName', '?')}] {post.get('content', '')[:120]}"
+                )
+                click.echo(
+                    f"  ❤ {post.get('likeCount', 0)}  💬 {post.get('commentCount', 0)}  🔄 {post.get('repostCount', 0)}  — {post.get('id', '')}"
+                )
                 click.echo()
 
 
@@ -44,14 +57,26 @@ def feed_explore(ctx, limit, load_more_key):
         data = client.explore_feed(limit=min(limit, 50), load_more_key=load_more_key)
         posts = data if isinstance(data, list) else data.get("data", [])
         if ctx.obj.get("json"):
-            print_json({"success": True, "data": posts, "loadMoreKey": data.get("loadMoreKey") if isinstance(data, dict) else None})
+            print_json(
+                {
+                    "success": True,
+                    "data": posts,
+                    "loadMoreKey": data.get("loadMoreKey")
+                    if isinstance(data, dict)
+                    else None,
+                }
+            )
         else:
             for post in posts:
                 user = post.get("user", {})
                 topic = post.get("topic", {})
                 topic_str = f"  #{topic.get('content', '')}" if topic else ""
-                click.echo(f"[{user.get('screenName', '?')}] {post.get('content', '')[:120]}")
+                click.echo(
+                    f"[{user.get('screenName', '?')}] {post.get('content', '')[:120]}"
+                )
                 if topic_str:
                     click.echo(topic_str)
-                click.echo(f"  ❤ {post.get('likeCount', 0)}  💬 {post.get('commentCount', 0)}  — {post.get('id', '')}")
+                click.echo(
+                    f"  ❤ {post.get('likeCount', 0)}  💬 {post.get('commentCount', 0)}  — {post.get('id', '')}"
+                )
                 click.echo()

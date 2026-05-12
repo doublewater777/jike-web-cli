@@ -1,4 +1,5 @@
-"""HTTP client for cli-web-jike."""
+"""HTTP client for jike."""
+
 from __future__ import annotations
 
 import json
@@ -29,7 +30,7 @@ class JikeClient:
         self._client = httpx.Client(
             timeout=httpx.Timeout(connect=10.0, read=30.0, write=60.0, pool=30.0),
             headers={
-                "User-Agent": "cli-web-jike/0.1.0",
+                "User-Agent": "jike/0.1.0",
                 "Accept": "application/json",
             },
         )
@@ -64,8 +65,14 @@ class JikeClient:
                 self._reload_token_from_disk()
             elif _attempt == 1:
                 self._refresh_via_browser()
-            return self._request(method, path, _attempt=_attempt + 1,
-                                _base_override=_base_override, _raw_response=_raw_response, **kwargs)
+            return self._request(
+                method,
+                path,
+                _attempt=_attempt + 1,
+                _base_override=_base_override,
+                _raw_response=_raw_response,
+                **kwargs,
+            )
 
         if not _raw_response:
             raise_for_status(resp)
@@ -91,7 +98,7 @@ class JikeClient:
             self._token = auth["token"]
         else:
             raise AuthError(
-                "Session expired and auto-refresh failed. Run: cli-web-jike auth login",
+                "Session expired and auto-refresh failed. Run: jike auth login",
                 recoverable=False,
             )
 
@@ -117,7 +124,12 @@ class JikeClient:
         resp = self._request("GET", "/1.0/originalPosts/get", params={"id": post_id})
         return self._parse(resp)
 
-    def create_post(self, content: str, picture_keys: list | None = None, topic_id: str | None = None) -> dict:
+    def create_post(
+        self,
+        content: str,
+        picture_keys: list | None = None,
+        topic_id: str | None = None,
+    ) -> dict:
         body = {
             "content": content,
             "pictureKeys": picture_keys or [],
@@ -135,14 +147,20 @@ class JikeClient:
             "pictures": [],
             "limit": limit,
         }
-        resp = self._request("POST", "/1.0/originalPosts/listDraftSuggestions", json=body)
+        resp = self._request(
+            "POST", "/1.0/originalPosts/listDraftSuggestions", json=body
+        )
         return self._parse(resp)
 
     # --- Image upload ---
 
     def get_upload_token(self) -> dict:
-        resp = self._request("GET", "/token", params={"bucket": "jike", "uploadType": "PIC"},
-                           _base_override="https://upload.ruguoapp.com")
+        resp = self._request(
+            "GET",
+            "/token",
+            params={"bucket": "jike", "uploadType": "PIC"},
+            _base_override="https://upload.ruguoapp.com",
+        )
         return resp.json()
 
     def upload_image(self, file_path: str) -> str:
@@ -168,9 +186,14 @@ class JikeClient:
         with open(file_path, "rb") as f:
             files = {"file": (path.name, f, mime_type)}
             data = {"token": uptoken}
-            resp = self._request("POST", "/", data=data, files=files,
-                               _base_override="https://upload.qiniup.com",
-                               _raw_response=True)
+            resp = self._request(
+                "POST",
+                "/",
+                data=data,
+                files=files,
+                _base_override="https://upload.qiniup.com",
+                _raw_response=True,
+            )
 
         result = resp.json()
         if not result.get("success"):
@@ -187,14 +210,18 @@ class JikeClient:
         resp = self._request("GET", "/1.0/users/profile", params=params)
         return self._parse(resp)
 
-    def get_following(self, username: str, limit: int = 20, load_more_key: str | None = None) -> dict:
+    def get_following(
+        self, username: str, limit: int = 20, load_more_key: str | None = None
+    ) -> dict:
         body = {"username": username, "limit": limit}
         if load_more_key:
             body["loadMoreKey"] = load_more_key
         resp = self._request("POST", "/1.0/userRelation/getFollowingList", json=body)
         return self._parse(resp)
 
-    def get_followers(self, username: str, limit: int = 20, load_more_key: str | None = None) -> dict:
+    def get_followers(
+        self, username: str, limit: int = 20, load_more_key: str | None = None
+    ) -> dict:
         body = {"username": username, "limit": limit}
         if load_more_key:
             body["loadMoreKey"] = load_more_key
@@ -207,7 +234,9 @@ class JikeClient:
         resp = self._request("GET", "/1.0/topics/getDetail", params={"id": topic_id})
         return self._parse(resp)
 
-    def topic_feed(self, topic_id: str, limit: int = 20, load_more_key: str | None = None) -> dict:
+    def topic_feed(
+        self, topic_id: str, limit: int = 20, load_more_key: str | None = None
+    ) -> dict:
         body = {"topicId": topic_id, "limit": limit}
         if load_more_key:
             body["loadMoreKey"] = load_more_key
@@ -216,7 +245,9 @@ class JikeClient:
 
     # --- Notifications ---
 
-    def notifications_list(self, limit: int = 20, load_more_key: str | None = None) -> dict:
+    def notifications_list(
+        self, limit: int = 20, load_more_key: str | None = None
+    ) -> dict:
         body = {"limit": limit}
         if load_more_key:
             body["loadMoreKey"] = load_more_key
@@ -230,12 +261,18 @@ class JikeClient:
     # --- Search ---
 
     def search_suggestions(self, keyword: str, limit: int = 10) -> dict:
-        resp = self._request("GET", "/1.0/related/keywordTip", params={"keyword": keyword, "limit": limit})
+        resp = self._request(
+            "GET",
+            "/1.0/related/keywordTip",
+            params={"keyword": keyword, "limit": limit},
+        )
         return self._parse(resp)
 
     # --- Comments ---
 
-    def get_comments(self, target_id: str, limit: int = 20, load_more_key: str | None = None) -> dict:
+    def get_comments(
+        self, target_id: str, limit: int = 20, load_more_key: str | None = None
+    ) -> dict:
         body = {"targetId": target_id, "limit": limit}
         if load_more_key:
             body["loadMoreKey"] = load_more_key

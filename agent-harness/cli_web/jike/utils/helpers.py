@@ -1,4 +1,5 @@
-"""Shared helpers for cli-web-jike."""
+"""Shared helpers for jike."""
+
 from __future__ import annotations
 
 import io

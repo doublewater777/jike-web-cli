@@ -1,4 +1,5 @@
-"""Structured JSON output helpers for cli-web-jike."""
+"""Structured JSON output helpers for jike."""
+
 from __future__ import annotations
 
 import json

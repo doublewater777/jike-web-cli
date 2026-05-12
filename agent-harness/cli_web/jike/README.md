@@ -1,16 +1,16 @@
-# cli-web-jike
+# jike
 
 CLI for [Jike (即刻)](https://web.okjike.com/) — a Chinese social networking platform.
 
 ## Installation
 
 ```bash
-pip install -e jike/agent-harness
+pip install jike-web-cli
 ```
 
 For browser-based authentication:
 ```bash
-pip install -e "jike/agent-harness[auth]"
+pip install "jike-web-cli[auth]"
 playwright install chromium
 ```
 
@@ -18,19 +18,19 @@ playwright install chromium
 
 ```bash
 # Authenticate (opens browser for SMS/WeChat login)
-cli-web-jike auth login
+jike auth login
 
 # Your following feed
-cli-web-jike feed following
+jike feed following
 
 # Create a post
-cli-web-jike posts create "Hello Jike"
+jike posts create "Hello Jike"
 
 # Create a post with an image
-cli-web-jike posts create "Check this out" --image ~/photo.png
+jike posts create "Check this out" --image ~/photo.png
 
 # All commands support --json output
-cli-web-jike --json feed following --limit 5
+jike --json feed following --limit 5
 ```
 
 ## Commands
@@ -86,20 +86,20 @@ cli-web-jike --json feed following --limit 5
 
 ## Auth
 
-JWT token stored at `~/.config/cli-web-jike/auth.json` (chmod 600).
+JWT token stored at `~/.config/jike/auth.json` (chmod 600).
 For CI/CD, set the `CLI_WEB_JIKE_AUTH_JSON` environment variable with a JSON `{"token": "..."}` value.
 
 Token expiration: tokens are short-lived. Run `auth login` to refresh via browser.
 
 ## REPL Mode
 
-Run `cli-web-jike` without arguments to enter interactive REPL mode with:
+Run `jike` without arguments to enter interactive REPL mode with:
 - Command history
 - Auto-completion
 - Branded banner
 
 ```bash
-cli-web-jike
+jike
 > feed following --limit 3
 > users profile
 > exit

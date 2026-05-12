@@ -1,4 +1,5 @@
-"""Unit tests for cli-web-jike core modules (mocked HTTP)."""
+"""Unit tests for jike core modules (mocked HTTP)."""
+
 from __future__ import annotations
 
 import json
@@ -21,6 +22,7 @@ from cli_web.jike.utils.helpers import handle_errors, print_json
 
 
 # ── Exception hierarchy ──────────────────────────────────────────────────────────
+
 
 class TestExceptions:
     def test_base_error_to_dict(self):
@@ -101,6 +103,7 @@ class TestRaiseForStatus:
 
 # ── Client (mocked HTTP) ─────────────────────────────────────────────────────────
 
+
 class TestClient:
     @pytest.fixture
     def mock_httpx(self):
@@ -118,7 +121,7 @@ class TestClient:
             JikeClient(token="my-token")
             call_args = mock_client_class.call_args
             headers = call_args[1]["headers"]
-            assert headers["User-Agent"] == "cli-web-jike/0.1.0"
+            assert headers["User-Agent"] == "jike/0.1.0"
 
     def test_request_injects_token_header(self, client, mock_httpx):
         mock_httpx.request.return_value.status_code = 200
@@ -138,43 +141,80 @@ class TestClient:
 
     def test_network_error_on_connect_failure(self, client, mock_httpx):
         import httpx
+
         mock_httpx.request.side_effect = httpx.ConnectError("connection refused")
         with pytest.raises(NetworkError, match="Connection failed"):
             client.get_profile()
 
     def test_get_profile(self, client, mock_httpx):
         mock_httpx.request.return_value.status_code = 200
-        mock_httpx.request.return_value.json.return_value = {"user": {"screenName": "test"}}
+        mock_httpx.request.return_value.json.return_value = {
+            "user": {"screenName": "test"}
+        }
         result = client.get_profile()
         assert "user" in result
-        mock_httpx.request.assert_called_with("GET", "https://api.ruguoapp.com/1.0/users/profile", headers=mock_httpx.request.call_args[1]["headers"], params={})
+        mock_httpx.request.assert_called_with(
+            "GET",
+            "https://api.ruguoapp.com/1.0/users/profile",
+            headers=mock_httpx.request.call_args[1]["headers"],
+            params={},
+        )
 
     def test_get_profile_with_username(self, client, mock_httpx):
         mock_httpx.request.return_value.status_code = 200
-        mock_httpx.request.return_value.json.return_value = {"user": {"screenName": "other"}}
+        mock_httpx.request.return_value.json.return_value = {
+            "user": {"screenName": "other"}
+        }
         client.get_profile(username="some-uuid")
-        mock_httpx.request.assert_called_with("GET", "https://api.ruguoapp.com/1.0/users/profile", headers=mock_httpx.request.call_args[1]["headers"], params={"username": "some-uuid"})
+        mock_httpx.request.assert_called_with(
+            "GET",
+            "https://api.ruguoapp.com/1.0/users/profile",
+            headers=mock_httpx.request.call_args[1]["headers"],
+            params={"username": "some-uuid"},
+        )
 
     def test_get_post(self, client, mock_httpx):
         mock_httpx.request.return_value.status_code = 200
-        mock_httpx.request.return_value.json.return_value = {"data": {"id": "post-1", "content": "hello"}}
+        mock_httpx.request.return_value.json.return_value = {
+            "data": {"id": "post-1", "content": "hello"}
+        }
         result = client.get_post("post-1")
         assert result["id"] == "post-1"
-        mock_httpx.request.assert_called_with("GET", "https://api.ruguoapp.com/1.0/originalPosts/get", headers=mock_httpx.request.call_args[1]["headers"], params={"id": "post-1"})
+        mock_httpx.request.assert_called_with(
+            "GET",
+            "https://api.ruguoapp.com/1.0/originalPosts/get",
+            headers=mock_httpx.request.call_args[1]["headers"],
+            params={"id": "post-1"},
+        )
 
     def test_following_feed(self, client, mock_httpx):
         mock_httpx.request.return_value.status_code = 200
-        mock_httpx.request.return_value.json.return_value = {"success": True, "data": []}
+        mock_httpx.request.return_value.json.return_value = {
+            "success": True,
+            "data": [],
+        }
         result = client.following_feed(limit=10)
         assert result == []
-        method, path, kwargs = mock_httpx.request.call_args[0], mock_httpx.request.call_args[1]["params"] if "params" in mock_httpx.request.call_args[1] else None, mock_httpx.request.call_args[1]
+        method, path, kwargs = (
+            mock_httpx.request.call_args[0],
+            mock_httpx.request.call_args[1]["params"]
+            if "params" in mock_httpx.request.call_args[1]
+            else None,
+            mock_httpx.request.call_args[1],
+        )
         assert mock_httpx.request.call_args[1].get("json") == {"limit": 10}
 
     def test_following_feed_with_pagination(self, client, mock_httpx):
         mock_httpx.request.return_value.status_code = 200
-        mock_httpx.request.return_value.json.return_value = {"success": True, "data": []}
+        mock_httpx.request.return_value.json.return_value = {
+            "success": True,
+            "data": [],
+        }
         client.following_feed(limit=10, load_more_key="key123")
-        assert mock_httpx.request.call_args[1]["json"] == {"limit": 10, "loadMoreKey": "key123"}
+        assert mock_httpx.request.call_args[1]["json"] == {
+            "limit": 10,
+            "loadMoreKey": "key123",
+        }
 
     def test_explore_feed(self, client, mock_httpx):
         mock_httpx.request.return_value.status_code = 200
@@ -184,7 +224,9 @@ class TestClient:
 
     def test_search_suggestions(self, client, mock_httpx):
         mock_httpx.request.return_value.status_code = 200
-        mock_httpx.request.return_value.json.return_value = {"data": [{"suggestion": "AI"}]}
+        mock_httpx.request.return_value.json.return_value = {
+            "data": [{"suggestion": "AI"}]
+        }
         result = client.search_suggestions("AI")
         assert result[0]["suggestion"] == "AI"
 
@@ -207,6 +249,7 @@ class TestClient:
 
 
 # ── Helpers ──────────────────────────────────────────────────────────────────────
+
 
 class TestHandleErrors:
     def test_passes_through_success(self):

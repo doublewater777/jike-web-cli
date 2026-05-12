@@ -1,4 +1,5 @@
-"""Post commands for cli-web-jike."""
+"""Post commands for jike."""
+
 from __future__ import annotations
 
 import click
@@ -23,15 +24,23 @@ def posts_get(ctx, post_id):
         if ctx.obj.get("json"):
             print_json({"success": True, "data": data})
         else:
-            post = data if isinstance(data, dict) else (data.get("data", {}) if isinstance(data, dict) else {})
+            post = (
+                data
+                if isinstance(data, dict)
+                else (data.get("data", {}) if isinstance(data, dict) else {})
+            )
             user = post.get("user", {})
             click.echo(f"Post: {post.get('id', '?')}")
-            click.echo(f"By: {user.get('screenName', '?')} (@{user.get('username', '?')})")
+            click.echo(
+                f"By: {user.get('screenName', '?')} (@{user.get('username', '?')})"
+            )
             click.echo(f"At: {post.get('createdAt', '?')}")
             click.echo()
             click.echo(post.get("content", ""))
             click.echo()
-            click.echo(f"❤ {post.get('likeCount', 0)}  💬 {post.get('commentCount', 0)}  🔄 {post.get('repostCount', 0)}")
+            click.echo(
+                f"❤ {post.get('likeCount', 0)}  💬 {post.get('commentCount', 0)}  🔄 {post.get('repostCount', 0)}"
+            )
             if post.get("topic"):
                 click.echo(f"Topic: {post['topic'].get('content', '')}")
 
@@ -39,7 +48,9 @@ def posts_get(ctx, post_id):
 @posts.command("create")
 @click.argument("content")
 @click.option("--topic-id", default=None, help="Topic/圈子 ID to post to.")
-@click.option("--image", "image_path", default=None, help="Path to an image file to attach.")
+@click.option(
+    "--image", "image_path", default=None, help="Path to an image file to attach."
+)
 @click.pass_context
 def posts_create(ctx, content, topic_id, image_path):
     """Create a new post (动态). Optionally attach an image."""
@@ -74,4 +85,6 @@ def posts_suggest(ctx, content, limit):
             print_json({"success": True, "data": items})
         else:
             for item in items:
-                click.echo(f"[{item.get('type', '?')}] {item.get('content', item.get('suggestion', '?'))}")
+                click.echo(
+                    f"[{item.get('type', '?')}] {item.get('content', item.get('suggestion', '?'))}"
+                )

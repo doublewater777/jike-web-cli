@@ -11,4 +11,6 @@ build/
 *.jpg
 *.log
 *.yml
-traffic-capture/jike-auth.json
+traffic-capture/
+phase-state.json
+agent-harness/jike/

@@ -1,4 +1,5 @@
-"""cli-web-jike — CLI entry point."""
+"""jike — CLI entry point."""
+
 from __future__ import annotations
 
 import sys
@@ -22,6 +23,7 @@ _skin = ReplSkin(app="jike", version="0.1.0")
 
 
 # ── Auth commands ────────────────────────────────────────────────────────────────
+
 
 @click.group()
 def auth():
@@ -54,7 +56,7 @@ def auth_status(json_mode):
             if logged_in:
                 click.echo("Logged in ✓")
             else:
-                click.echo("Not logged in. Run: cli-web-jike auth login")
+                click.echo("Not logged in. Run: jike auth login")
 
 
 @auth.command("logout")
@@ -77,12 +79,13 @@ from .commands.comments import comments
 
 # ── Main CLI group ────────────────────────────────────────────────────────────────
 
+
 @click.group(invoke_without_command=True)
 @click.option("--json", "json_mode", is_flag=True, help="Output as JSON.")
-@click.version_option("0.1.0", prog_name="cli-web-jike")
+@click.version_option("0.1.0", prog_name="jike")
 @click.pass_context
 def cli(ctx, json_mode):
-    """cli-web-jike — CLI for Jike (即刻).
+    """jike — CLI for Jike (即刻).
 
     Run without arguments to enter interactive REPL mode.
     """
@@ -106,6 +109,7 @@ cli.add_command(comments)
 
 
 # ── REPL ─────────────────────────────────────────────────────────────────────────
+
 
 def _print_repl_help() -> None:
     _skin.info("Available commands:")

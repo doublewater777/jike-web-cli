@@ -1,4 +1,5 @@
-"""User commands for cli-web-jike."""
+"""User commands for jike."""
+
 from __future__ import annotations
 
 import click
@@ -30,9 +31,13 @@ def users_profile(ctx, username):
                 profile = user_data
             click.echo(f"Name: {profile.get('screenName', '?')}")
             click.echo(f"Username: {profile.get('username', '?')}")
-            click.echo(f"Bio: {profile.get('briefIntro', '') or profile.get('bio', '')}")
+            click.echo(
+                f"Bio: {profile.get('briefIntro', '') or profile.get('bio', '')}"
+            )
             stats = profile.get("statsCount", {})
-            click.echo(f"Following: {stats.get('followingCount', 0)}  Followers: {stats.get('followedCount', 0)}")
+            click.echo(
+                f"Following: {stats.get('followingCount', 0)}  Followers: {stats.get('followedCount', 0)}"
+            )
 
 
 @users.command("following")
@@ -44,13 +49,25 @@ def users_following(ctx, username, limit, load_more_key):
     """List users that a given user follows."""
     with handle_errors(ctx.obj.get("json")):
         client = JikeClient()
-        data = client.get_following(username, limit=min(limit, 50), load_more_key=load_more_key)
+        data = client.get_following(
+            username, limit=min(limit, 50), load_more_key=load_more_key
+        )
         users_list = data if isinstance(data, list) else data.get("data", [])
         if ctx.obj.get("json"):
-            print_json({"success": True, "data": users_list, "loadMoreKey": data.get("loadMoreKey") if isinstance(data, dict) else None})
+            print_json(
+                {
+                    "success": True,
+                    "data": users_list,
+                    "loadMoreKey": data.get("loadMoreKey")
+                    if isinstance(data, dict)
+                    else None,
+                }
+            )
         else:
             for u in users_list:
-                click.echo(f"{u.get('screenName', '?')} (@{u.get('username', '?')}) — {u.get('briefIntro', '')[:80]}")
+                click.echo(
+                    f"{u.get('screenName', '?')} (@{u.get('username', '?')}) — {u.get('briefIntro', '')[:80]}"
+                )
 
 
 @users.command("followers")
@@ -62,10 +79,22 @@ def users_followers(ctx, username, limit, load_more_key):
     """List followers of a given user."""
     with handle_errors(ctx.obj.get("json")):
         client = JikeClient()
-        data = client.get_followers(username, limit=min(limit, 50), load_more_key=load_more_key)
+        data = client.get_followers(
+            username, limit=min(limit, 50), load_more_key=load_more_key
+        )
         users_list = data if isinstance(data, list) else data.get("data", [])
         if ctx.obj.get("json"):
-            print_json({"success": True, "data": users_list, "loadMoreKey": data.get("loadMoreKey") if isinstance(data, dict) else None})
+            print_json(
+                {
+                    "success": True,
+                    "data": users_list,
+                    "loadMoreKey": data.get("loadMoreKey")
+                    if isinstance(data, dict)
+                    else None,
+                }
+            )
         else:
             for u in users_list:
-                click.echo(f"{u.get('screenName', '?')} (@{u.get('username', '?')}) — {u.get('briefIntro', '')[:80]}")
+                click.echo(
+                    f"{u.get('screenName', '?')} (@{u.get('username', '?')}) — {u.get('briefIntro', '')[:80]}"
+                )

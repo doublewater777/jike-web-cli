@@ -1,4 +1,4 @@
-# TEST.md — cli-web-jike Test Plan & Results
+# TEST.md — jike Test Plan & Results
 
 
 ## Part 1: Test Plan

@@ -1,7 +1,8 @@
-"""E2E and subprocess tests for cli-web-jike.
+"""E2E and subprocess tests for jike.
 
 Requires auth. Tests FAIL (do not skip) when auth is missing.
 """
+
 from __future__ import annotations
 
 import json
@@ -18,17 +19,19 @@ from cli_web.jike.core.exceptions import AuthError
 
 # ── Auth check (FAIL, don't skip) ────────────────────────────────────────────────
 
+
 @pytest.fixture(scope="module")
 def client():
     """Create authenticated client. Fails if auth is missing."""
     if not is_logged_in():
-        pytest.fail("Not logged in. Run: cli-web-jike auth login")
+            pytest.fail("Not logged in. Run: jike auth login")
     return JikeClient()
 
 
 # ── Resolve CLI binary for subprocess tests ──────────────────────────────────────
 
-def _resolve_cli(name: str = "cli-web-jike") -> str:
+
+def _resolve_cli(name: str = "jike") -> str:
     """Resolve the installed CLI binary path.
 
     Returns the binary name if on PATH, or falls back to
@@ -37,6 +40,7 @@ def _resolve_cli(name: str = "cli-web-jike") -> str:
     if os.environ.get("CLI_WEB_FORCE_INSTALLED"):
         return name
     import shutil
+
     resolved = shutil.which(name)
     if resolved:
         return resolved
@@ -44,10 +48,11 @@ def _resolve_cli(name: str = "cli-web-jike") -> str:
     return name
 
 
-CLI = _resolve_cli("cli-web-jike")
+CLI = _resolve_cli("jike")
 
 
 # ── Live E2E tests ───────────────────────────────────────────────────────────────
+
 
 @pytest.mark.live
 class TestLiveAPI:
@@ -94,7 +99,9 @@ class TestLiveAPI:
         if not post:
             pytest.skip("No ORIGINAL_POST in feed to test with")
         data = client.get_post(post["id"])
-        assert data.get("id") == post["id"] or data.get("data", {}).get("id") == post["id"]
+        assert (
+            data.get("id") == post["id"] or data.get("data", {}).get("id") == post["id"]
+        )
 
     def test_unread_count(self, client):
         """Unread notification count endpoint works."""
@@ -145,7 +152,9 @@ class TestLiveAPI:
         users = data if isinstance(data, list) else data.get("data", [])
         assert isinstance(users, list)
 
-    @pytest.mark.xfail(reason="comments/listPrimary returns 400 — may need additional params not captured in traffic")
+    @pytest.mark.xfail(
+        reason="comments/listPrimary returns 400 — may need additional params not captured in traffic"
+    )
     def test_get_comments(self, client):
         """Get comments on a post works (endpoint may need extra params)."""
         post = self._get_first_post(client)
@@ -157,6 +166,7 @@ class TestLiveAPI:
 
 
 # ── Subprocess tests ─────────────────────────────────────────────────────────────
+
 
 @pytest.mark.subprocess
 class TestCLISubprocess:
@@ -175,7 +185,7 @@ class TestCLISubprocess:
     def test_help(self):
         r = self.run_cli("--help")
         assert r.returncode == 0
-        assert "cli-web-jike" in r.stdout
+        assert "jike" in r.stdout
         assert "auth" in r.stdout
 
     def test_version(self):
@@ -193,7 +203,7 @@ class TestCLISubprocess:
     def test_feed_following_json(self):
         """CLI feed following --json returns valid JSON with items."""
         if not is_logged_in():
-            pytest.fail("Not logged in. Run: cli-web-jike auth login")
+        pytest.fail("Not logged in. Run: jike auth login")
         r = self.run_cli("--json", "feed", "following", "--limit", "5")
         assert r.returncode == 0, f"CLI failed: {r.stderr}"
         data = json.loads(r.stdout)

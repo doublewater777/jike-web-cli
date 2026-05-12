@@ -1,6 +1,6 @@
 ---
 name: jike-cli
-description: Use when the user asks about 即刻 (Jike) — viewing their feed, exploring posts, checking topics, searching, viewing notifications, or browsing user profiles on web.okjike.com. Always prefer cli-web-jike over manually fetching the website.
+description: Use when the user asks about 即刻 (Jike) — viewing their feed, exploring posts, checking topics, searching, viewing notifications, or browsing user profiles on web.okjike.com. Always prefer jike over manually fetching the website.
 ---
 
 # Jike (即刻) CLI
@@ -11,24 +11,24 @@ Agent-native CLI for [web.okjike.com](https://web.okjike.com/).
 
 ```bash
 # Auth (opens browser for SMS/WeChat login)
-cli-web-jike auth login
+jike auth login
 
 # Your following feed as JSON
-cli-web-jike --json feed following --limit 10
+jike --json feed following --limit 10
 
 # Explore feed
-cli-web-jike --json feed explore --limit 10
+jike --json feed explore --limit 10
 
 # User profile
-cli-web-jike --json users profile <username-uuid>
+jike --json users profile <username-uuid>
 
 # Search suggestions
-cli-web-jike --json search suggestions <keyword>
+jike --json search suggestions <keyword>
 ```
 
 ## Auth
 
-JWT token stored at `~/.config/cli-web-jike/auth.json` (chmod 600).
+JWT token stored at `~/.config/jike/auth.json` (chmod 600).
 Env var: `CLI_WEB_JIKE_AUTH_JSON` for CI/CD.
 
 Token expires periodically — `auth login` re-opens the browser for SMS/WeChat login.
@@ -72,16 +72,16 @@ Token expires periodically — `auth login` re-opens the browser for SMS/WeChat 
 
 ```bash
 # Check what's trending in a topic
-cli-web-jike --json topics feed 63579abb6724cc583b9bba9a --limit 5
+jike --json topics feed 63579abb6724cc583b9bba9a --limit 5
 
 # Find a user's recent activity
-cli-web-jike --json users profile <uuid> | jq '.data.user'
+jike --json users profile <uuid> | jq '.data.user'
 
 # Search for topics
-cli-web-jike --json search suggestions "AI" | jq '.data[].suggestion'
+jike --json search suggestions "AI" | jq '.data[].suggestion'
 
 # Get a post's full content
-cli-web-jike --json posts get <post_id> | jq '.data.content'
+jike --json posts get <post_id> | jq '.data.content'
 ```
 
 ## Notes

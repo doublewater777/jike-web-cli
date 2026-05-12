@@ -1,4 +1,5 @@
-"""Search commands for cli-web-jike."""
+"""Search commands for jike."""
+
 from __future__ import annotations
 
 import click

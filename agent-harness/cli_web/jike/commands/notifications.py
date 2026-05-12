@@ -1,4 +1,5 @@
-"""Notification commands for cli-web-jike."""
+"""Notification commands for jike."""
+
 from __future__ import annotations
 
 import click
@@ -20,10 +21,20 @@ def notifications_list(ctx, limit, load_more_key):
     """List your notifications."""
     with handle_errors(ctx.obj.get("json")):
         client = JikeClient()
-        data = client.notifications_list(limit=min(limit, 50), load_more_key=load_more_key)
+        data = client.notifications_list(
+            limit=min(limit, 50), load_more_key=load_more_key
+        )
         items = data if isinstance(data, list) else data.get("data", [])
         if ctx.obj.get("json"):
-            print_json({"success": True, "data": items, "loadMoreKey": data.get("loadMoreKey") if isinstance(data, dict) else None})
+            print_json(
+                {
+                    "success": True,
+                    "data": items,
+                    "loadMoreKey": data.get("loadMoreKey")
+                    if isinstance(data, dict)
+                    else None,
+                }
+            )
         else:
             for n in items:
                 action = n.get("actionType", "?")

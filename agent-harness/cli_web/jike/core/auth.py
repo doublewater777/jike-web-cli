@@ -1,8 +1,9 @@
-"""Auth management for cli-web-jike.
+"""Auth management for jike.
 
 Uses Python playwright for browser-based login.
-Stores JWT access token at ~/.config/cli-web-jike/auth.json.
+Stores JWT access token at ~/.config/jike/auth.json.
 """
+
 from __future__ import annotations
 
 import asyncio
@@ -15,9 +16,9 @@ from pathlib import Path
 
 from .exceptions import AuthError
 
-CONFIG_DIR = Path.home() / ".config" / "cli-web-jike"
+CONFIG_DIR = Path.home() / ".config" / "jike"
 AUTH_FILE = CONFIG_DIR / "auth.json"
-ENV_VAR = "CLI_WEB_JIKE_AUTH_JSON"
+ENV_VAR = "JIKE_AUTH_JSON"
 PROFILE_DIR = CONFIG_DIR / "browser-profile"
 
 SITE_URL = "https://web.okjike.com"
@@ -70,7 +71,7 @@ def load_auth() -> dict:
         except (json.JSONDecodeError, OSError):
             pass
 
-    raise AuthError("Not logged in. Run: cli-web-jike auth login")
+    raise AuthError("Not logged in. Run: jike auth login")
 
 
 def get_token() -> str:
@@ -82,7 +83,7 @@ def get_token() -> str:
     token = auth.get("token")
     if token:
         return token
-    raise AuthError("No access token. Run: cli-web-jike auth login")
+    raise AuthError("No access token. Run: jike auth login")
 
 
 def clear_auth() -> None:
@@ -101,6 +102,7 @@ def is_logged_in() -> bool:
 # ---------------------------------------------------------------------------
 # Token refresh (headless browser)
 # ---------------------------------------------------------------------------
+
 
 def refresh_auth() -> dict | None:
     """Silently refresh the JWT token using the persistent browser profile."""
@@ -130,7 +132,9 @@ def refresh_auth() -> dict | None:
             page.goto(SITE_URL, wait_until="domcontentloaded")
             page.wait_for_timeout(5000)
 
-            token = page.evaluate("() => localStorage.getItem('JK_ACCESS_TOKEN') || localStorage.getItem('accessToken') || localStorage.getItem('token') || ''")
+            token = page.evaluate(
+                "() => localStorage.getItem('JK_ACCESS_TOKEN') || localStorage.getItem('accessToken') || localStorage.getItem('token') || ''"
+            )
             context.close()
 
         if token:
@@ -145,6 +149,7 @@ def refresh_auth() -> dict | None:
 # ---------------------------------------------------------------------------
 # Browser login
 # ---------------------------------------------------------------------------
+
 
 def login_browser() -> dict:
     """Open browser for manual login, extract JWT access token.
@@ -195,7 +200,9 @@ def login_browser() -> dict:
         cookies = context.cookies()
         cookie_dict = {}
         for c in cookies:
-            if "okjike.com" in c.get("domain", "") or "ruguoapp.com" in c.get("domain", ""):
+            if "okjike.com" in c.get("domain", "") or "ruguoapp.com" in c.get(
+                "domain", ""
+            ):
                 cookie_dict[c["name"]] = c["value"]
 
         context.close()

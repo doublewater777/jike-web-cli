@@ -1,7 +1,7 @@
 from setuptools import find_namespace_packages, setup
 
 setup(
-    name="cli-web-jike",
+    name="jike-web-cli",
     version="0.1.1",
     description="CLI for Jike (即刻) — agent-native interface to web.okjike.com",
     packages=find_namespace_packages(include=["cli_web.*"]),
@@ -18,7 +18,7 @@ setup(
     },
     entry_points={
         "console_scripts": [
-            "cli-web-jike=cli_web.jike.jike_cli:main",
+            "jike=cli_web.jike.jike_cli:main",
         ],
     },
 )

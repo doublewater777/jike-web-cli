@@ -1,15 +1,16 @@
-"""Typed exception hierarchy for cli-web-jike.
+"""Typed exception hierarchy for jike.
 
 Every exception carries enough context for:
 - Retry decisions (recoverable flag, retry_after)
 - Structured JSON output (to_dict / error_code_for)
 - CLI exit codes (auth=1, server=2, network=3)
 """
+
 from __future__ import annotations
 
 
 class JikeError(Exception):
-    """Base exception for all cli-web-jike errors."""
+    """Base exception for all jike errors."""
 
     def to_dict(self) -> dict:
         return {
