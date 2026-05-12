@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "cli-web-jike"
-version = "0.1.0"
+version = "0.1.1"
 description = "Agent-native CLI for Jike (即刻) — interact with web.okjike.com from the terminal"
 readme = { file = "cli_web/jike/README.md", content-type = "text/markdown" }
 license = { text = "MIT" }
