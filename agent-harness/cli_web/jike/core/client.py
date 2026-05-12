@@ -124,7 +124,7 @@ class JikeClient:
             "syncToPersonalUpdate": True,
         }
         if topic_id:
-            body["topicId"] = topic_id
+            body["submitToTopic"] = topic_id
         resp = self._request("POST", "/1.0/originalPosts/create", json=body)
         return self._parse(resp)
 
