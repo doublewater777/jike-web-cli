@@ -1,0 +1,481 @@
+{
+  "_meta": {
+    "tool": "analyze-traffic.py",
+    "version": "1.3.0",
+    "description": "Auto-generated traffic analysis. Fields marked 'unknown' need manual agent analysis."
+  },
+  "protocol": {
+    "protocol": "rest",
+    "confidence": 98.5,
+    "signals": {
+      "rest": 768,
+      "ssr_html": 12
+    }
+  },
+  "auth": {
+    "primary": "none",
+    "patterns": {
+      "none": 100.0
+    }
+  },
+  "protections": {
+    "protections": {},
+    "details": [],
+    "has_protection": false,
+    "recommended_client": "httpx"
+  },
+  "endpoints": [
+    {
+      "prefix": "cdnv2.ruguoapp.com/resources/like_lottie",
+      "count": 204,
+      "methods": {
+        "GET": 204
+      },
+      "has_writes": false,
+      "unique_urls": 34,
+      "sample_urls": [
+        "https://cdnv2.ruguoapp.com/resources/like_lottie/v2/apple202409.json",
+        "https://cdnv2.ruguoapp.com/resources/like_lottie/v2/apple202509.json",
+        "https://cdnv2.ruguoapp.com/resources/like_lottie/v2/ballon.json",
+        "https://cdnv2.ruguoapp.com/resources/like_lottie/v2/basketball.json",
+        "https://cdnv2.ruguoapp.com/resources/like_lottie/v2/birthday.json"
+      ]
+    },
+    {
+      "prefix": "jike-io.ruguoapp.com/socket.io",
+      "count": 131,
+      "methods": {
+        "POST": 58,
+        "GET": 73
+      },
+      "has_writes": true,
+      "unique_urls": 1,
+      "sample_urls": [
+        "https://jike-io.ruguoapp.com/socket.io/"
+      ]
+    },
+    {
+      "prefix": "api.ruguoapp.com/1.0/users",
+      "count": 103,
+      "methods": {
+        "GET": 103
+      },
+      "has_writes": false,
+      "unique_urls": 1,
+      "sample_urls": [
+        "https://api.ruguoapp.com/1.0/users/profile"
+      ]
+    },
+    {
+      "prefix": "sentry.midway.run/api/694",
+      "count": 28,
+      "methods": {
+        "POST": 28
+      },
+      "has_writes": true,
+      "unique_urls": 1,
+      "sample_urls": [
+        "https://sentry.midway.run/api/694/envelope/"
+      ]
+    },
+    {
+      "prefix": "plausible.midway.run/api/event",
+      "count": 16,
+      "methods": {
+        "POST": 16
+      },
+      "has_writes": true,
+      "unique_urls": 1,
+      "sample_urls": [
+        "https://plausible.midway.run/api/event"
+      ]
+    },
+    {
+      "prefix": "api.ruguoapp.com/1.0/notifications",
+      "count": 8,
+      "methods": {
+        "GET": 7,
+        "POST": 1
+      },
+      "has_writes": true,
+      "unique_urls": 2,
+      "sample_urls": [
+        "https://api.ruguoapp.com/1.0/notifications/list",
+        "https://api.ruguoapp.com/1.0/notifications/unread"
+      ]
+    },
+    {
+      "prefix": "web.okjike.com/manifest.webmanifest",
+      "count": 6,
+      "methods": {
+        "GET": 6
+      },
+      "has_writes": false,
+      "unique_urls": 1,
+      "sample_urls": [
+        "https://web.okjike.com/manifest.webmanifest"
+      ]
+    },
+    {
+      "prefix": "/https:/web.okjike.com",
+      "count": 6,
+      "methods": {
+        "GET": 6
+      },
+      "has_writes": false,
+      "unique_urls": 6,
+      "sample_urls": [
+        "blob:https://web.okjike.com/097c0089-8bc2-4ebb-a065-2fa7b6952c02",
+        "blob:https://web.okjike.com/1092d114-bfb2-46f2-9887-6e1c868ffc68",
+        "blob:https://web.okjike.com/12d7745d-fc18-41bf-838c-81594cea38fd",
+        "blob:https://web.okjike.com/15b19327-18c3-4fbf-a4a3-8150bd4f8c68",
+        "blob:https://web.okjike.com/1c25bdee-7fac-4ece-aa08-9ffa6b57107d"
+      ]
+    },
+    {
+      "prefix": "api.ruguoapp.com/1.0/manifests",
+      "count": 6,
+      "methods": {
+        "GET": 6
+      },
+      "has_writes": false,
+      "unique_urls": 1,
+      "sample_urls": [
+        "https://api.ruguoapp.com/1.0/manifests/getBase"
+      ]
+    },
+    {
+      "prefix": "api.ruguoapp.com/1.0/configs",
+      "count": 6,
+      "methods": {
+        "POST": 6
+      },
+      "has_writes": true,
+      "unique_urls": 1,
+      "sample_urls": [
+        "https://api.ruguoapp.com/1.0/configs/appGet"
+      ]
+    },
+    {
+      "prefix": "api.ruguoapp.com/1.0/topics",
+      "count": 4,
+      "methods": {
+        "GET": 2,
+        "POST": 2
+      },
+      "has_writes": true,
+      "unique_urls": 2,
+      "sample_urls": [
+        "https://api.ruguoapp.com/1.0/topics/getDetail",
+        "https://api.ruguoapp.com/1.0/topics/tabs/square/feed"
+      ]
+    },
+    {
+      "prefix": "api.ruguoapp.com/1.0/userRelation",
+      "count": 2,
+      "methods": {
+        "POST": 2
+      },
+      "has_writes": true,
+      "unique_urls": 2,
+      "sample_urls": [
+        "https://api.ruguoapp.com/1.0/userRelation/getFollowerList",
+        "https://api.ruguoapp.com/1.0/userRelation/getFollowingList"
+      ]
+    },
+    {
+      "prefix": "api.ruguoapp.com/1.0/personalUpdate",
+      "count": 2,
+      "methods": {
+        "POST": 2
+      },
+      "has_writes": true,
+      "unique_urls": 2,
+      "sample_urls": [
+        "https://api.ruguoapp.com/1.0/personalUpdate/followingUpdates",
+        "https://api.ruguoapp.com/1.0/personalUpdate/single"
+      ]
+    },
+    {
+      "prefix": "api.ruguoapp.com/1.0/related",
+      "count": 2,
+      "methods": {
+        "GET": 2
+      },
+      "has_writes": false,
+      "unique_urls": 1,
+      "sample_urls": [
+        "https://api.ruguoapp.com/1.0/related/keywordTip"
+      ]
+    },
+    {
+      "prefix": "web.okjike.com/u/{id}",
+      "count": 1,
+      "methods": {
+        "GET": 1
+      },
+      "has_writes": false,
+      "unique_urls": 1,
+      "sample_urls": [
+        "https://web.okjike.com/u/d772db76-4de8-4b9a-8329-d78f16b75f59"
+      ]
+    },
+    {
+      "prefix": "web.okjike.com/topic/{id}",
+      "count": 1,
+      "methods": {
+        "GET": 1
+      },
+      "has_writes": false,
+      "unique_urls": 1,
+      "sample_urls": [
+        "https://web.okjike.com/topic/63579abb6724cc583b9bba9a"
+      ]
+    },
+    {
+      "prefix": "web.okjike.com/more",
+      "count": 1,
+      "methods": {
+        "GET": 1
+      },
+      "has_writes": false,
+      "unique_urls": 1,
+      "sample_urls": [
+        "https://web.okjike.com/more"
+      ]
+    },
+    {
+      "prefix": "web.okjike.com/explore",
+      "count": 1,
+      "methods": {
+        "GET": 1
+      },
+      "has_writes": false,
+      "unique_urls": 1,
+      "sample_urls": [
+        "https://web.okjike.com/explore"
+      ]
+    },
+    {
+      "prefix": "api.ruguoapp.com/1.0/recommendFeed",
+      "count": 1,
+      "methods": {
+        "POST": 1
+      },
+      "has_writes": true,
+      "unique_urls": 1,
+      "sample_urls": [
+        "https://api.ruguoapp.com/1.0/recommendFeed/list"
+      ]
+    },
+    {
+      "prefix": "web.okjike.com/notification",
+      "count": 1,
+      "methods": {
+        "GET": 1
+      },
+      "has_writes": false,
+      "unique_urls": 1,
+      "sample_urls": [
+        "https://web.okjike.com/notification"
+      ]
+    }
+  ],
+  "rate_limits": {
+    "status_429_count": 0,
+    "rate_limit_headers": null,
+    "retry_after_values": null,
+    "has_rate_limiting": false
+  },
+  "pagination": {
+    "has_pagination": true,
+    "paginated_endpoints": [
+      {
+        "prefix": "api.ruguoapp.com/1.0/related",
+        "params": [
+          "limit"
+        ]
+      }
+    ],
+    "cli_note": "List commands on paginated endpoints should support --page/--limit/--cursor flags"
+  },
+  "stats": {
+    "total_requests": 550,
+    "read_operations": 433,
+    "write_operations": 117,
+    "is_read_only": false,
+    "methods": {
+      "POST": 117,
+      "GET": 433
+    },
+    "status_codes": {
+      "200": 519,
+      "-1": 19,
+      "202": 10,
+      "302": 1,
+      "400": 1
+    },
+    "top_mime_types": {
+      "application/json": 362,
+      "text/plain": 76,
+      "text/html": 64,
+      "x-unknown": 20,
+      "image/jpeg": 11
+    },
+    "unique_domains": [
+      "api.ruguoapp.com",
+      "avatar.ruguoapp.com",
+      "cdnv2.ruguoapp.com",
+      "jike-io.ruguoapp.com",
+      "plausible.midway.run",
+      "sentry.midway.run",
+      "web.okjike.com"
+    ]
+  },
+  "suggested_commands": [
+    {
+      "group": "like_lottie",
+      "prefix": "cdnv2.ruguoapp.com/resources/like_lottie",
+      "commands": [
+        {
+          "name": "list",
+          "method": "GET",
+          "description": "List like_lottie"
+        },
+        {
+          "name": "get",
+          "method": "GET",
+          "description": "Get a specific like_lottie"
+        }
+      ]
+    },
+    {
+      "group": "socket.io",
+      "prefix": "jike-io.ruguoapp.com/socket.io",
+      "commands": [
+        {
+          "name": "list",
+          "method": "GET",
+          "description": "List socket.io"
+        },
+        {
+          "name": "create",
+          "method": "POST",
+          "description": "Create a new socket.io"
+        }
+      ]
+    },
+    {
+      "group": "users",
+      "prefix": "api.ruguoapp.com/1.0/users",
+      "commands": [
+        {
+          "name": "list",
+          "method": "GET",
+          "description": "List users"
+        }
+      ]
+    },
+    {
+      "group": "694",
+      "prefix": "sentry.midway.run/api/694",
+      "commands": [
+        {
+          "name": "create",
+          "method": "POST",
+          "description": "Create a new 694"
+        }
+      ]
+    },
+    {
+      "group": "event",
+      "prefix": "plausible.midway.run/api/event",
+      "commands": [
+        {
+          "name": "create",
+          "method": "POST",
+          "description": "Create a new event"
+        }
+      ]
+    },
+    {
+      "group": "notifications",
+      "prefix": "api.ruguoapp.com/1.0/notifications",
+      "commands": [
+        {
+          "name": "list",
+          "method": "GET",
+          "description": "List notifications"
+        },
+        {
+          "name": "get",
+          "method": "GET",
+          "description": "Get a specific notification"
+        },
+        {
+          "name": "create",
+          "method": "POST",
+          "description": "Create a new notification"
+        }
+      ]
+    },
+    {
+      "group": "manifest.webmanifest",
+      "prefix": "web.okjike.com/manifest.webmanifest",
+      "commands": [
+        {
+          "name": "list",
+          "method": "GET",
+          "description": "List manifest.webmanifest"
+        }
+      ]
+    },
+    {
+      "group": "web.okjike.com",
+      "prefix": "/https:/web.okjike.com",
+      "commands": [
+        {
+          "name": "list",
+          "method": "GET",
+          "description": "List web.okjike.com"
+        },
+        {
+          "name": "get",
+          "method": "GET",
+          "description": "Get a specific web.okjike.com"
+        }
+      ]
+    },
+    {
+      "group": "manifests",
+      "prefix": "api.ruguoapp.com/1.0/manifests",
+      "commands": [
+        {
+          "name": "list",
+          "method": "GET",
+          "description": "List manifests"
+        }
+      ]
+    },
+    {
+      "group": "configs",
+      "prefix": "api.ruguoapp.com/1.0/configs",
+      "commands": [
+        {
+          "name": "create",
+          "method": "POST",
+          "description": "Create a new config"
+        }
+      ]
+    }
+  ],
+  "request_sequence": {
+    "has_timestamps": false
+  },
+  "session_lifecycle": {
+    "has_cookie_data": false
+  },
+  "endpoint_sizes": {
+    "has_size_data": false
+  }
+}

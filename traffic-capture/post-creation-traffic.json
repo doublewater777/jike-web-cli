@@ -1,0 +1,44 @@
+[
+  {
+    "url": "https://api.ruguoapp.com/1.0/originalPosts/listDraftSuggestions",
+    "method": "POST",
+    "postData": "{\"content\":\"CLI测试 1778569585\",\"localTimezone\":\"Asia/Shanghai\",\"pictures\":[],\"limit\":5}",
+    "resourceType": "xhr"
+  },
+  {
+    "url": "https://api.ruguoapp.com/1.0/originalPosts/create",
+    "method": "POST",
+    "postData": "{\"content\":\"CLI测试 1778569585\",\"pictureKeys\":[],\"syncToPersonalUpdate\":true}",
+    "resourceType": "xhr"
+  },
+  {
+    "url": "https://tr.ruguoapp.com/sa.gif?project=jike&data=eyJkaXN0aW5jdF9pZCI6IjYyNjM1M2VlNDc3ODY0MDAxMDcxMTczNCIsImxpYiI6eyIkbGliIjoianMiLCIkbGliX21ldGhvZCI6ImNvZGUiLCIkbGliX3ZlcnNpb24iOiIxLjEzLjE0In0sInByb3BlcnRpZXMiOnsiZXZlbnRfaW5mbyI6eyJldmVudCI6ImZlZWRfY29udGVudF92aWV3In0sImNvbnRlbnRfaW5mbyI6eyJhY3Rpb24",
+    "method": "GET",
+    "postData": null,
+    "resourceType": "image"
+  },
+  {
+    "url": "https://tr.ruguoapp.com/sa.gif?project=jike&data=eyJkaXN0aW5jdF9pZCI6IjYyNjM1M2VlNDc3ODY0MDAxMDcxMTczNCIsImxpYiI6eyIkbGliIjoianMiLCIkbGliX21ldGhvZCI6ImNvZGUiLCIkbGliX3ZlcnNpb24iOiIxLjEzLjE0In0sInByb3BlcnRpZXMiOnsiZXZlbnRfaW5mbyI6eyJldmVudCI6ImZlZWRfY29udGVudF92aWV3In0sImNvbnRlbnRfaW5mbyI6eyJhY3Rpb24",
+    "method": "GET",
+    "postData": null,
+    "resourceType": "image"
+  },
+  {
+    "url": "https://tr.ruguoapp.com/sa.gif?project=jike&data=eyJkaXN0aW5jdF9pZCI6IjYyNjM1M2VlNDc3ODY0MDAxMDcxMTczNCIsImxpYiI6eyIkbGliIjoianMiLCIkbGliX21ldGhvZCI6ImNvZGUiLCIkbGliX3ZlcnNpb24iOiIxLjEzLjE0In0sInByb3BlcnRpZXMiOnsiZXZlbnRfaW5mbyI6eyJldmVudCI6ImZlZWRfY29udGVudF92aWV3In0sImNvbnRlbnRfaW5mbyI6eyJhY3Rpb24",
+    "method": "GET",
+    "postData": null,
+    "resourceType": "image"
+  },
+  {
+    "url": "https://jike-io.ruguoapp.com/socket.io/?EIO=3&transport=polling&t=PuR0YnA&sid=u77k_el-YD9-VrX0o-ay",
+    "method": "POST",
+    "postData": "1:2",
+    "resourceType": "xhr"
+  },
+  {
+    "url": "https://jike-io.ruguoapp.com/socket.io/?EIO=3&transport=polling&t=PuR0YoR&sid=u77k_el-YD9-VrX0o-ay",
+    "method": "GET",
+    "postData": null,
+    "resourceType": "xhr"
+  }
+]

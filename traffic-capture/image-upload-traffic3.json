@@ -1,0 +1,62 @@
+[
+  {
+    "url": "blob:https://web.okjike.com/2029e188-ab70-4c0f-b08d-0aa9c3943aa6",
+    "method": "GET",
+    "postData": null,
+    "contentType": ""
+  },
+  {
+    "url": "https://api.ruguoapp.com/1.0/originalPosts/listDraftSuggestions",
+    "method": "POST",
+    "postData": "{\"content\":\"\",\"localTimezone\":\"Asia/Shanghai\",\"pictures\":[],\"limit\":5}",
+    "contentType": "application/json"
+  },
+  {
+    "url": "https://upload.ruguoapp.com/token?bucket=jike&uploadType=PIC",
+    "method": "GET",
+    "postData": null,
+    "contentType": ""
+  },
+  {
+    "url": "https://upload.qiniup.com/",
+    "method": "POST",
+    "postData": null,
+    "contentType": "multipart/form-data; boundary=----WebKitFormBoundaryDgolWqUmsDQ5nAqW"
+  },
+  {
+    "url": "blob:https://web.okjike.com/2904af74-4887-47b4-93f0-f93bd32e5446",
+    "method": "GET",
+    "postData": null,
+    "contentType": ""
+  },
+  {
+    "url": "https://api.ruguoapp.com/1.0/originalPosts/listDraftSuggestions",
+    "method": "POST",
+    "postData": "{\"content\":\"\",\"localTimezone\":\"Asia/Shanghai\",\"pictures\":[{\"key\":\"FqIJxIE6Z2vOWex7ugxUCzeSf2qUv3.png\",\"metaData\":{}}],\"limit\":5}",
+    "contentType": "application/json"
+  },
+  {
+    "url": "https://jike-io.ruguoapp.com/socket.io/?EIO=3&transport=polling&t=PuR2tAx&sid=ph8LG2yrCmWWGxDQo_db",
+    "method": "POST",
+    "postData": "1:2",
+    "contentType": "text/plain;charset=UTF-8"
+  },
+  {
+    "url": "https://jike-io.ruguoapp.com/socket.io/?EIO=3&transport=polling&t=PuR2tBV&sid=ph8LG2yrCmWWGxDQo_db",
+    "method": "GET",
+    "postData": null,
+    "contentType": ""
+  },
+  {
+    "url": "https://jike-io.ruguoapp.com/socket.io/?EIO=3&transport=polling&t=PuR2uPf&sid=ph8LG2yrCmWWGxDQo_db",
+    "method": "POST",
+    "postData": "1:2",
+    "contentType": "text/plain;charset=UTF-8"
+  },
+  {
+    "url": "https://jike-io.ruguoapp.com/socket.io/?EIO=3&transport=polling&t=PuR2uQW&sid=ph8LG2yrCmWWGxDQo_db",
+    "method": "GET",
+    "postData": null,
+    "contentType": ""
+  }
+]

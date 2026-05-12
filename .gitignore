@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+*.trace
+*.network
+.playwright-cli/
+*.jpeg
+*.jpg
+*.log
+*.yml
+traffic-capture/jike-auth.json
